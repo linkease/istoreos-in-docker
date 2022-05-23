@@ -1,5 +1,6 @@
 FROM scratch
 ADD rootfs.tar.gz /
+COPY quickstart /usr/sbin/quickstart
 RUN mkdir -p /var/lock
 RUN opkg remove --force-depends \
       iw* && \
@@ -11,6 +12,7 @@ RUN echo "iptables -A POSTROUTING -t mangle -p udp --dport 68 -j CHECKSUM --chec
 RUN sed -i '/^exit 0/i cat \/tmp\/resolv.conf > \/etc\/resolv.conf' /etc/rc.local
 
 RUN sed -i "/ttyS0/d" /etc/inittab
+RUN sed -i "/tty1/d" /etc/inittab
 
 ARG ts
 LABEL org.opencontainers.image.created=$ts
