@@ -1,6 +1,6 @@
 FROM scratch
 ADD rootfs.tar.gz /
-COPY quickstart /usr/sbin/quickstart
+#COPY quickstart /usr/sbin/quickstart
 RUN mkdir -p /var/lock
 RUN opkg remove --force-depends \
       iw* && \
