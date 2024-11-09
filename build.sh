@@ -2,9 +2,7 @@
 set -e
 
 docker_build() {
-	docker build \
-		--build-arg ts="$(date)" \
-		-t "$IMAGE":"$TAG" .
+	docker build --build-arg ts="$(date)" -t "linkease/istoredup:0.1" .
 }
 
 docker_build
