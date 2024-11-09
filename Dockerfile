@@ -4,6 +4,7 @@ COPY ./setupvmease /etc/init.d/setupvmease
 RUN mkdir -p /var/lock
 RUN opkg remove --force-depends iw*
 
+RUN /etc/init.d/setupvmease enable
 RUN echo "iptables -A POSTROUTING -t mangle -p udp --dport 68 -j CHECKSUM --checksum-fill" >> /etc/firewall.user
 RUN sed -i '/^exit 0/i cat \/tmp\/resolv.conf > \/etc\/resolv.conf' /etc/rc.local
 
