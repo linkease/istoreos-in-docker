@@ -1,8 +1,8 @@
 FROM scratch
 ADD rootfs.tar.gz /
+COPY ./setupvmease /etc/init.d/setupvmease
 RUN mkdir -p /var/lock
-RUN opkg remove --force-depends iw* && \
-    opkg update
+RUN opkg remove --force-depends iw*
 
 RUN echo "iptables -A POSTROUTING -t mangle -p udp --dport 68 -j CHECKSUM --checksum-fill" >> /etc/firewall.user
 RUN sed -i '/^exit 0/i cat \/tmp\/resolv.conf > \/etc\/resolv.conf' /etc/rc.local
